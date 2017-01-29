@@ -10,7 +10,7 @@ class Driver
 
   #wouldn't ever use global variables in production code, and this is supposed to be
   #production level code, however global variable is the correct solution to this problem imo
-  #with no database so I went with it.
+  #so with no database so I went with it.
 
   def self.drivers
     @@drivers ||= {}
@@ -24,8 +24,10 @@ class Driver
 
   def self.output_sorted_drivers
     sorted_drivers.each do |name, driver|
+      mph = Trip.calculate_mph(driver.total_distance, driver.total_duration)
+
       print "#{name}: #{driver.total_distance.to_i || 0} miles"
-      print " @ #{Trip.calculate_mph(driver.total_distance, driver.total_duration)} mph" unless driver.total_distance.to_i.zero?
+      print " @ #{mph} mph" unless driver.total_distance.to_i.zero?
       puts
     end
   end
@@ -73,6 +75,7 @@ class Trip
   def self.calculate_mph(total_distance, total_time)
     return 0 if total_distance.to_f.zero? || total_time.to_f.zero?
 
+    #distance/time * (60minutes/ 1 hour)
     ((total_distance.to_f / total_time.to_f) * 60).round
   end
 
@@ -80,6 +83,7 @@ class Trip
     start_hours, start_minutes = start_time.split(":")
     end_hours, end_minutes = end_time.split(":")
 
+    #((end_hours - start_hours) * (60 minutes/hour)) + (summed minutes)
     ((end_hours.to_i - start_hours.to_i) * 60) + (end_minutes.to_i - start_minutes.to_i)
   end
 end
