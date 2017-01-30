@@ -1,3 +1,10 @@
+I've opted to go with the read from file approach for input so to run this file please run:
+
+    ruby root_sample.rb "<name of input file>"
+
+Included in the project directory is the sample file given in the problem statement.  To run that use: 
+
+    ruby root_sample.rb "input.txt"
 
 I decided that I only needed two classes here Driver and Trip.  Each driver can 'have_many' trips and I store the trips in an array on each driver class.  This makes it easier to sum information about each driver and how long/fast each of their trips were.  I elected to store the drivers I imported with a global variable on the driver class.  As I said in the comments, I wouldn't normally do this but it was the correct way to store the imported drivers.
 
