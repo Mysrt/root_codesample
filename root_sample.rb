@@ -47,11 +47,15 @@ class Driver
         driver_name = attr[1]
 
         driver = drivers[driver_name]
-        driver.trips << Trip.new(start_time: attr[2], end_time: attr[3], distance: attr[4].to_f)
+        driver.add_trip(Trip.new(start_time: attr[2], end_time: attr[3], distance: attr[4]))
       end
     end
 
     @@drivers = drivers
+  end
+
+  def add_trip(trip)
+    self.trips << trip if trip.valid?
   end
 
   def total_duration
@@ -85,6 +89,12 @@ class Trip
 
     #((end_hours - start_hours) * (60 minutes/hour)) + (summed minutes)
     ((end_hours.to_i - start_hours.to_i) * 60) + (end_minutes.to_i - start_minutes.to_i)
+  end
+
+  def valid?
+    mph = Trip.calculate_mph(distance, duration)
+
+    ( mph >= 5 ) && ( mph <= 100)
   end
 end
 

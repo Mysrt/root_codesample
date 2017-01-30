@@ -12,4 +12,4 @@ The import method on the driver class populates the driver list which i elected 
 
 The helper methods on Driver class are pretty self explanatory, two summation methods and a sorting method to output them final list in the correct order (by distance).  The helper methods on trip are a little bit more complex including the math needed to calculate total duration by hours/minutes.
 
-Realistically I would just use a datetime class to calculate the difference in time for me (especially since this information would likely be stored as dates in the DB), but since the requirement was added it cant go past 12 this seemed like a more simple approach.  MPH helper method converts the miles/minutes into miles/hour and returns zero if either parameter is missing.
+Realistically I would just use a datetime class to calculate the difference in time for me (especially since this information would likely be stored as dates in the DB), but since the requirement was added it cant go past 24 this seemed like a more simple approach.  MPH helper method converts the miles/minutes into miles/hour and returns zero if either parameter is missing.

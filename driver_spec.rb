@@ -43,6 +43,24 @@ describe "Driver" do
     end
   end
 
+  describe "#add_trip" do
+    it "adds the trip to the drivers trip if its valid" do
+      trip = Trip.new(distance: "7.8")
+      allow(trip).to receive(:valid?).and_return(true)
+      @driver.add_trip trip
+
+      expect(@driver.trips).to include(trip)
+    end
+
+    it "does not add the trip to the drivers trips if it is invalid" do
+      trip = Trip.new(distance: "7.8")
+      allow(trip).to receive(:valid?).and_return(false)
+      @driver.add_trip trip
+
+      expect(@driver.trips).not_to include(trip)
+    end
+  end
+
   describe "importing and displaying drivers" do
     before :each do
       @commands = [

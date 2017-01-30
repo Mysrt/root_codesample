@@ -51,6 +51,21 @@ describe "Trip" do
     end
   end
 
+  describe "#valid?" do
+    it "returns true if the average mph of the trip is greater than 5mph and less than 100mph" do
+      expect(Trip.new(start_time: "02:45", end_time: "03:45", distance: 30).valid?).to be_truthy
+    end
+
+    it "returns false if the average mph of the trip is less than 5mph" do
+      expect(Trip.new(start_time: "02:45", end_time: "03:45", distance: 4).valid?).to be_falsey
+
+    end
+
+    it "returns false if the average mph of the trip is greater than 100mph" do
+      expect(Trip.new(start_time: "02:45", end_time: "03:45", distance: 120).valid?).to be_falsey
+    end
+  end
+
   describe "#duration" do
     it "calculates the duration (in minutes) of each trip in minutes based on a start an end time" do
       expect(Trip.new(start_time: "02:23", end_time: "02:45").duration).to eq(22)
