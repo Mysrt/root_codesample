@@ -26,7 +26,7 @@ class Driver
     sorted_drivers.each do |name, driver|
       mph = Trip.calculate_mph(driver.total_distance, driver.total_duration)
 
-      print "#{name}: #{driver.total_distance.to_i || 0} miles"
+      print "#{name}: #{driver.total_distance.round || 0} miles"
       print " @ #{mph} mph" unless driver.total_distance.to_i.zero?
       puts
     end
